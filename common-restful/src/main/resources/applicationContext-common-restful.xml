@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+  		http://www.springframework.org/schema/beans/spring-beans.xsd
+  		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+     	http://www.springframework.org/schema/tx/spring-tx.xsd
+     	http://cxf.apache.org/jaxws
+		http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/jaxrs
+    	http://cxf.apache.org/schemas/jaxrs.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="org.rency.common.cxf.restful" />
+	
+	<import resource="classpath*:applicationContext-common-utils.xml"/>
+
+	<bean id="restfulAspect" class="org.rency.common.cxf.restful.aspect.RestfulAspect" />
+
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="servicePointcut" expression="execution(public * org.rency.common.cxf.restful.facade.impl..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut" />
+		
+		<aop:aspect ref="restfulAspect">
+			<aop:before pointcut-ref="servicePointcut" method="beforeAdvice" />
+			<aop:after-returning pointcut-ref="servicePointcut" method="afterAdvice" />
+			<aop:after-throwing pointcut-ref="servicePointcut" method="afterThrowAdvice" throwing="ex" />
+		</aop:aspect>
+	</aop:config>
+	
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+    
+    <bean id="testFacade" class="org.rency.common.cxf.restful.facade.impl.TestFacadeImpl" />
+    <jaxws:endpoint id="testFacadeWs" address="/test" implementor="#testFacade" />
+    
+    <!-- 
+	在web.xml中需要如下配置
+	  <servlet>
+	  	<servlet-name>CXFServlet</servlet-name>
+	  	<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+	  	<load-on-startup>2</load-on-startup>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>CXFServlet</servlet-name>
+	  	<url-pattern>/ws/*</url-pattern>
+	  </servlet-mapping>
+	 -->
+
+</beans>
