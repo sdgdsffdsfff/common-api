@@ -108,7 +108,6 @@ public class DESUtils {
         return cipher.doFinal(data);
     }
 
-
 	public static void main(String[] args) throws Exception {
 		System.out.println(encrypt("rency","MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDWSmemWPnhGhu5IPfnGbDPwQLpgiNGb9oQIXZ/rzWEPJ+3XUAbpLygfoKfFJ6bh7yN4QAgB9dimfcUYM6jYIA+k7H0jA3N4Eq1/w5y26cIgkTuVCUySBxj4u3CbmqhhOYiFADGsxQqqUGyhcDQV+m2tT/7DwC5BHY2kU3oWJ64fQIDAQAB"));
 		System.out.println(decrypt("gNl0nOmN3S0=","MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDWSmemWPnhGhu5IPfnGbDPwQLpgiNGb9oQIXZ/rzWEPJ+3XUAbpLygfoKfFJ6bh7yN4QAgB9dimfcUYM6jYIA+k7H0jA3N4Eq1/w5y26cIgkTuVCUySBxj4u3CbmqhhOYiFADGsxQqqUGyhcDQV+m2tT/7DwC5BHY2kU3oWJ64fQIDAQAB"));

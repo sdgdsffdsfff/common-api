@@ -66,7 +66,7 @@ public class Base64Utils {
 	* @return
 	 */
 	public static String encoder(byte[] content){
-		String s = encoder.encode(content);
+		String s = encoder.encodeBuffer(content);
         logger.debug("Base64 encoder{} ->{} ",content,s);
         return s; 
 	}

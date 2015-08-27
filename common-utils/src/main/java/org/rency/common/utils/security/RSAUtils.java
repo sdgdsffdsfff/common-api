@@ -27,7 +27,11 @@ public class RSAUtils {
 	private static final String KEY_ALGORITHM = "RSA";//加密算法RSA
 	private static final int KEY_LENGTH = 1024;//密钥长度
 	
-	/** 生成密钥对(公钥和私钥) */
+	/**
+	 * 生成密钥对(公钥和私钥)
+	 * @return
+	 * @throws Exception
+	 */
     public static KeyPair genKeyPair() throws Exception {
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
         keyPairGen.initialize(KEY_LENGTH);

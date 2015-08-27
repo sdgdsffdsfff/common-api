@@ -76,7 +76,12 @@ public class MD5Utils {
         return bufferToHex(messagedigest.digest()).toUpperCase();  
     }  
   
-    private static String bufferToHex(byte bytes[]) {  
+    /**
+     * byte[]转换为字符串
+     * @param bytes
+     * @return
+     */
+    public static String bufferToHex(byte bytes[]) {  
         return bufferToHex(bytes, 0, bytes.length);  
     }  
   
@@ -97,22 +102,61 @@ public class MD5Utils {
     }  
     
     /**
-	 * 
-	* @Title: encryptSHA 
-	* @Description: SHA(Secure Hash Algorithm，安全散列算法,非可逆加密)，数字签名等密码学应用中重要的工具，被广泛地应用于电子商务等信息安全领域。虽然，SHA与MD5通过碰撞法都被破解了， 但是SHA仍然是公认的安全加密算法，较之MD5更为安全。
-	* @Date: 2015年3月8日 下午10:04:05
-	* @param key
-	* @return
-	* @throws CoreException
-	 */
+     * SHA加密
+     * @param key
+     * @return
+     * @throws CoreException
+     */
 	public static String SHA(String key) throws CoreException{
 		try {
 			MessageDigest sha = MessageDigest.getInstance("SHA");
 			sha.update(key.getBytes());
-			return  new String(sha.digest());
+			return  bufferToHex(sha.digest()).toUpperCase();
 		} catch (NoSuchAlgorithmException e) {
 			logger.error("SHA加密异常.",e);
 			throw new CoreException(e);
 		}
+	}
+	
+	/**
+	 * SHA-1加密
+	 * @param key
+	 * @return
+	 * @throws CoreException
+	 */
+	public static String SHA1(String key) throws CoreException{
+		try {
+			MessageDigest sha = MessageDigest.getInstance("SHA-1");
+			sha.update(key.getBytes());
+			return  bufferToHex(sha.digest()).toUpperCase();
+		} catch (NoSuchAlgorithmException e) {
+			logger.error("SHA-1加密异常.",e);
+			throw new CoreException(e);
+		}
+	}
+	
+	/**
+	 * SHA-256加密
+	 * @param key
+	 * @return
+	 * @throws CoreException
+	 */
+	public static String SHA256(String key) throws CoreException{
+		try {
+			MessageDigest sha = MessageDigest.getInstance("SHA-256");
+			sha.update(key.getBytes());
+			return  bufferToHex(sha.digest()).toUpperCase();
+		} catch (NoSuchAlgorithmException e) {
+			logger.error("SHA-256加密异常.",e);
+			throw new CoreException(e);
+		}
+	}
+	
+	public static void main(String[] args) throws CoreException {
+		System.out.println("MD5="+MD5("rency"));
+		System.out.println("SHA="+SHA("rency"));
+		System.out.println("MD5+SHA="+MD5(MD5("rency")+SHA("rency")));
+		System.out.println("SHA1="+SHA1("rency"));
+		System.out.println("SHA256="+SHA256("rency"));
 	}
 }  
