@@ -46,7 +46,7 @@ public class SYSDICT {
 	/**
 	 * 回调路径KEY
 	 */
-	public static final String URL_PARAM_CALLBACK_KEY = "?callback=";
+	public static final String URL_PARAM_CALLBACK_KEY = "callback";
 	
 	/**
 	 * kaptcha生成session 验证码 key
