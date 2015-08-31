@@ -9,7 +9,7 @@ public class RegValidator {
 	
 	private static final String REG_EMAIL = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
 	private static final String REG_PHONE = "^(\\d{3,4}-)?\\d{6,8}$";
-	private static final String REG_MOBILE = "^[1]+[3,5]+\\d{9}$";
+	private static final String REG_MOBILE = "^(13|14|15|17|18)\\d{9}$";
 	private static final String REG_CARD = "^//d{15}|//d{18}$";
 	
 	/**
@@ -172,12 +172,8 @@ public class RegValidator {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(isEmail("user@163.com"));
 		System.out.println(isPhone("021-22222222"));
-		System.out.println(isMobile("13585740803"));
-		System.out.println(isIP("10.5.6.2"));
-		System.out.println(IsUpChar("ABC"));
-		System.out.println(IsChinese("12测试12"));
+		System.out.println(isMobile("17921531110"));
 	}
 	
 }
